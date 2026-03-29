@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-baseURL: baseURL: "https://employee-management-system-2jiq.onrender.com/api",
+baseURL: "https://employee-management-system-2jiq.onrender.com/api",
 });
 
 // ✅ Automatically attach token to every request
