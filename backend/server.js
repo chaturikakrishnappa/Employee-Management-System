@@ -30,6 +30,10 @@ app.get("/", (req, res) => {
   res.send("API Running ✅");
 });
 
+app.get("/api/test", (req, res) =>{
+  res.send("Backend API working ");
+});
+
 // 6️⃣ Start server
 const PORT = process.env.PORT || 5000;
 
