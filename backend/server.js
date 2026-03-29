@@ -37,10 +37,6 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
 // 🔥 Show all crashes clearly
 process.on("uncaughtException", (err) => {
   console.error("UNCAUGHT EXCEPTION:", err);
