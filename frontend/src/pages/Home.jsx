@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();  
 
+  const role = localStorage.getItem("role");
+  
   const [employees, setEmployees] = useState([]);
+  const [stats, setStats] = useState({});
 
   // fetch employees
   const getEmployees = async () => {
@@ -32,17 +35,34 @@ function Home() {
   }
  };
 
+ // fetch dashboard stats
+ const getStats = async () => {
+  try {
+    const res = await API.get("/stats");
+    setStats(res.data);
+  } catch (error) {
+    console.log("Stats error:", error);
+  }
+ };
+
   useEffect(() => {
-    getEmployees();
-  }, []);
+  getEmployees();
+  getStats();
+ }, []);
 
   return (
     <div style={{ textAlign: "center", marginTop: "40px" }}>
       <h2>Employee Dashboard</h2>
 
-      <button onClick={() => navigate("/add")}>
-        Add Employee
-      </button>
+      {role === "ADMIN" && (
+        <button onClick={() => navigate("/add")}>
+          Add Employee
+        </button>
+      )}
+
+      <div style={{ marginBottom: "20px" }}>
+        <h3>Total Employees: {stats.totalEmployees || 0}</h3>
+      </div>
 
       <table border="1" align="center" cellPadding="10">
        <thead>
@@ -63,17 +83,21 @@ function Home() {
         <td>{emp.position}</td>
         <td>{emp.salary}</td>
 
-        <td>
-          <button onClick={() => navigate(`/edit/${emp.id}`)}>
-            Edit
-          </button>
+    <td>
+      {role === "ADMIN" && (
+       <>
+        <button onClick={() => navigate(`/edit/${emp._id}`)}>
+          Edit
+        </button>
 
-          <button
-            onClick={() => deleteEmployee(emp.id)}
-            style={{ marginLeft: "10px" }}
+        <button
+             onClick={() => deleteEmployee(emp._id)}
+             style={{ marginLeft: "10px" }}
           >
-            Delete
-          </button>
+             Delete
+            </button>
+          </>
+         )}
         </td>
         </tr>
         ))}

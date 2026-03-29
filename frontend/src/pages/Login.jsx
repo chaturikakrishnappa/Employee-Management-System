@@ -25,15 +25,16 @@ function Login() {
 
       // save token
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", "ADMIN"); // temporary role 
 
       alert("Login Successful ✅");
 
       navigate("/home");
-    } catch (err) {
+     } catch (err) {
       alert("Invalid Credentials ❌");
       console.log(err);
-    }
-  };
+     }
+   };
 
   return (
     <div style={{ textAlign: "center", marginTop: "100px" }}>
