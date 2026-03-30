@@ -4,9 +4,10 @@
   "description": "Employee Management System Backend",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "postinstall": "prisma generate || true"
+  "start": "node server.js",
+  "dev": "nodemon server.js",
+  "postinstall": "prisma generate",
+  "render-build": "prisma migrate deploy && prisma generate"
   },
   "author": "",
   "license": "ISC",
